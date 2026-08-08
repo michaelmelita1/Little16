@@ -1,0 +1,9 @@
+Package: com.michaelmelita1.little16
+Name: Little16
+Author: michaelmelita1
+Description: iPhone X gestures for iOS 16
+Depends: mobilesubstrate
+Maintainer: michelmelita1
+Architecture: iphoneos-arm64
+Section: Tweaks
+Version: 0.0.1
