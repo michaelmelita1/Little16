@@ -121,15 +121,14 @@
 }
 %end
 
-%hook CCUIModularControlCenterOverlayViewController
-- (void)dismissAnimated:(bool)arg1 withCompletionHandler:(id)arg2 {
-    arg1 = 0;
-    %orig;
-}
-%end
+#define CGRectSetY(rect, y) CGRectMake(rect.origin.x, y, rect.size.width, rect.size.height)
 
-%hook CCUIOverlayStatusBarPresentationProvider
-- (void)_addHeaderContentTransformAnimationToBatch:(id)arg1 transitionState:(id)arg2 {
+@interface CCUIHeaderPocketView : UIView
+@end
+
+%hook CCUIHeaderPocketView
+- (void)setFrame:(CGRect)frame {
+    %orig(CGRectSetY(frame, -40));
 }
 %end
 
