@@ -128,7 +128,7 @@
 
 %hook CCUIHeaderPocketView
 - (void)setFrame:(CGRect)frame {
-    %orig(CGRectSetY(frame, -40));
+    %orig(CGRectSetY(frame, 0));
 }
 %end
 
