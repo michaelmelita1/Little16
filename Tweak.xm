@@ -121,14 +121,9 @@
 }
 %end
 
-#define CGRectSetY(rect, y) CGRectMake(rect.origin.x, y, rect.size.width, rect.size.height)
-
-@interface CCUIHeaderPocketView : UIView
-@end
-
-%hook CCUIHeaderPocketView
-- (void)setFrame:(CGRect)frame {
-    %orig(CGRectSetY(frame, 0));
+%hook _UIStatusBarVisualProvider_iOS
++ (Class)class {
+    return %c(_UIStatusBarVisualProvider_Pad_ForcedCellular);
 }
 %end
 
