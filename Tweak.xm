@@ -1,5 +1,27 @@
 #import <UIKit/UIKit.h>
 
+static BOOL ViewContainsClass(UIView *view, Class targetClass, int depth) {
+    if (!view || depth > 20) return NO;
+    if ([view isKindOfClass:targetClass]) return YES;
+    for (UIView *sub in view.subviews) {
+        if (ViewContainsClass(sub, targetClass, depth + 1)) return YES;
+    }
+    return NO;
+}
+
+%hook UIWindow
+- (UIEdgeInsets)safeAreaInsets {
+    UIEdgeInsets orig = %orig;
+    if (orig.bottom <= 0.0) {
+        Class qaCls = NSClassFromString(@"CSQuickActionsButton");
+        if (qaCls && ViewContainsClass(self, qaCls, 0)) {
+            orig.bottom = 20;
+        }
+    }
+    return orig;
+}
+%end
+
 @interface CSQuickActionsView : UIView
 - (UIEdgeInsets)_buttonOutsets;
 @property (nonatomic, retain) UIControl *flashlightButton;
@@ -7,6 +29,10 @@
 @end
 
 %hook CSQuickActionsView
+
+- (BOOL)wantsQuickActions {
+    return YES;
+}
 
 - (BOOL)_prototypingAllowsButtons {
     return YES;
