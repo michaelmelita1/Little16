@@ -171,3 +171,23 @@ static BOOL ViewContainsClass(UIView *view, Class targetClass, int depth) {
 - (BOOL)hasFlashlight { return YES; }
 %end
 
+@interface NCNotificationListView : UIView
+@end
+
+%hook NCNotificationListView
+- (void)setFrame:(CGRect)frame {
+    frame = CGRectMake(0, -100, frame.size.width, frame.size.height);
+    %orig(frame);
+}
+%end
+
+@interface CSFullscreenNotificationView : UIView
+@end
+
+%hook CSFullscreenNotificationView
+- (void)setFrame:(CGRect)frame {
+    frame = CGRectMake(0, -50, frame.size.width, frame.size.height);
+    %orig(frame);
+}
+%end
+
