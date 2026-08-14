@@ -176,7 +176,9 @@ static BOOL ViewContainsClass(UIView *view, Class targetClass, int depth) {
 
 %hook NCNotificationListView
 - (void)setFrame:(CGRect)frame {
-    frame = CGRectMake(0, -100, frame.size.width, frame.size.height);
+    if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){16, 0, 0}]) {
+        frame = CGRectMake(0, -100, frame.size.width, frame.size.height);
+    }
     %orig(frame);
 }
 %end

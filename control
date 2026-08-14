@@ -6,5 +6,5 @@ Depends: mobilesubstrate
 Maintainer: michelmelita1
 Architecture: iphoneos-arm64
 Section: Tweaks
-Version: 0.0.7
+Version: 0.0.8
 Sileodepiction: https://michaelmelita1.github.io/sileodepictions/com.michaelmelita1.little16/info.json
